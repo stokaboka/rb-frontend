@@ -1,0 +1,14 @@
+<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
+  <defs>
+    <pattern id="pattern-0" x="0" y="0" width="25" height="25" patternUnits="userSpaceOnUse" viewBox="0 0 100 100">
+      <rect x="0" y="0" width="50" height="100" style="fill: black;"></rect>
+    </pattern>
+  </defs>
+  <polygon style="stroke: rgb(204, 204, 204); fill: rgb(0, 144, 19); stroke-width: 3;" points="277.837 167.024 294.967 125.803 301.927 134.368 279.978 167.559"></polygon>
+  <ellipse style="stroke-width: 3; stroke: rgb(204, 204, 204); fill: rgb(255, 136, 0);" transform="matrix(1, 0.000053, -0.000053, 1, -7.624927, 127.291498)" cx="252.847" cy="126.942" rx="100" ry="100" bx:origin="0.523 0.479"></ellipse>
+  <path style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);"></path>
+  <g transform="matrix(1, 0, 0, 1, -32.655247, 123.126335)">
+    <path d="M 219.738 96.471 C 236.34 46.389 283.271 16.842 317.704 36.514" style="fill: rgb(0, 207, 27); stroke: rgb(204, 204, 204); stroke-width: 3; stroke-linecap: round;"></path>
+    <path d="M 219.415 96.46 C 246.563 101.857 336.055 73.714 317.34 36.474" style="fill: rgb(0, 207, 27); stroke: rgb(204, 204, 204); stroke-width: 3; stroke-linecap: round;"></path>
+  </g>
+</svg>

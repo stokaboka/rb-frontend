@@ -1,0 +1,360 @@
+@media print {
+    * { background: transparent !important; color: black !important; text-shadow: none !important; filter:none !important; -ms-filter: none !important; } /* Black prints faster: h5bp.com/s */
+    a, a:visited { text-decoration: underline; }
+    a[href]:after { content: " (" attr(href) ")"; }
+    abbr[title]:after { content: " (" attr(title) ")"; }
+    .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; }  /* Don't show links for images, or javascript/internal links */
+    pre, blockquote { border: 1px solid #999; page-break-inside: avoid; }
+    thead { display: table-header-group; } /* h5bp.com/t */
+    tr, img { page-break-inside: avoid; }
+    img { max-width: 100% !important; }
+    @page { margin: 0.5cm; }
+    p, h2, h3 { orphans: 3; widows: 3; }
+    h2, h3 { page-break-after: avoid; }
+
+    body {font-size: 10px;}
+    body.ng-scope {font-size: 10px;}
+}
+
+
+.rb-no-print {
+    display: none;
+}
+
+.rb-status {
+
+}
+
+.rb-ok {
+    color: #006400;
+}
+
+.rb-error {
+    color: #821812;
+}
+
+.rb-validate-error{
+    color: #821812;
+}
+
+/**
+* RB GRID
+ */
+
+.rb-grid {
+}
+
+.rb-grid-table {
+    display: table;
+}
+
+.rb-grid-table-row {
+    display: table-row;
+}
+.rb-grid-table-cell {
+    display: table-cell;
+}
+
+/**
+* FLEX GRID
+ */
+
+.rb-container-grid  {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: flex-start;
+
+    align-content: flex-start;
+}
+
+.rb-container-grid-column {
+    flex-direction: column;
+}
+
+.rb-element-grid-row {
+    flex-direction: row;
+}
+
+/**
+TOOLBAR
+ */
+.rb-toolbar-label {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.rb-toolbar-info {
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+/**
+TABLES
+ */
+
+.rb-column-order-asc, .rb-column-order-desc {
+    fill: orangered;
+}
+
+/*.rb-column-order-asc {*/
+    /*fill: #00d100;*/
+/*}*/
+
+.rb-column-order-none {
+    fill: lightgrey;
+}
+
+
+.rb-column-filter-active {
+    background-color: lightyellow;
+}
+
+.rb-column-filter-active:hover {
+    background-color: #afd9ee;
+}
+
+rb-table-current-row, .rb-table-current-row {
+    background-color: lightyellow;
+}
+
+rb-table-current-row:hover, .rb-table-current-row:hover {
+    background-color: #7da4b9;
+}
+
+.rb-column-filter-inactive {
+}
+
+.md-icon-button.rb-no-margin {
+    margin: 0px;
+}
+
+
+.rb-panel {
+    /*border-bottom: 1px solid lightgrey;*/
+    margin: 3px;
+    border: 1px solid lightgrey;
+}
+
+.rb-home-title {
+    font-size: large;
+    color: #1e2022;
+}
+
+.rb-active {
+    color: orangered;
+}
+
+
+.rb-inactive {
+    color: lightgrey;
+}
+
+
+.rb-filter {}
+
+
+.rb-filter .rb-active {
+}
+
+
+.rb-filter .rb-inactive {
+}
+
+
+.rb-block {
+    border: 1px solid #dbdbdb;
+}
+
+/**
+    SIDE BAR
+ */
+
+.rb-sidebar {
+    position: absolute;
+    height: auto;
+
+}
+
+
+.rb-sidebar-header {
+
+    width: 100%;
+    border-bottom: 1px solid #3F51B5;
+}
+
+.rb-sidebar-header-text {
+    width: 100%;
+    font-size: 15px;
+}
+
+.rb-sidebar-element
+{
+    position: relative;
+
+    margin-top: 1px;
+    margin-bottom: 1px;
+    /*padding: 3px;*/
+    /*background-color: #FFFFFF;*/
+    /*border: solid 1px #e0e0e0;*/
+
+    /*color: #333333;*/
+
+    width: 100%;
+}
+
+/**
+  TABLE
+*/
+rb-table, .rb-table {
+    display: table;
+    border-collapse: collapse;
+    /*margin: 3px;*/
+    margin: 1px;
+    border: 1px solid #ddd;
+}
+
+
+rb-table-header, .rb-table-header {
+    display: table-row;
+    font-weight: bold;
+    border: 1px solid #ddd;
+}
+
+
+rb-table-row-group, .rb-table-row-group {
+    display: table-row-group;
+    border: 1px solid #ddd;
+}
+
+.rb-table-selectable-row {
+    cursor: pointer;
+}
+
+rb-table-row, .rb-table-row, rb-table-filter, .rb-table-filter {
+    display: table-row;
+    border: 1px solid #ddd;
+}
+
+
+rb-table-row:hover, .rb-table-row:hover {
+    background-color: #afd9ee;
+}
+
+
+rb-table-cell, .rb-table-cell {
+    display: table-cell;
+    border: 1px solid #ddd;
+    padding: 3px;
+}
+
+/*  TREE TABLE
+*/
+rb-tree-table, .rb-tree-table {
+    display: table;
+    border-collapse: collapse;
+    margin: 3px;
+}
+
+
+rb-tree-table-header, .rb-tree-table-header {
+    display: table-row;
+    font-weight: bold;
+    border: 1px solid #ddd;
+}
+
+
+.rb-tree-table-row-group {
+    display: table-row-group;
+}
+
+
+rb-tree-table-row, .rb-tree-table-row {
+    display: table-row;
+}
+
+
+rb-tree-table-row:hover, .rb-tree-table-row:hover {
+    background-color: #afd9ee;
+}
+
+
+rb-tree-table-cell, .rb-tree-table-cell {
+    display: table-cell;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+    padding: 3px;
+}
+
+
+.rb-item-format {
+    width: 100%;
+}
+
+
+.rb-date {
+    text-align: right;
+}
+
+
+.rb-number {
+    text-align: right;
+    /*color: darkorange;*/
+}
+
+
+/**
+* interface colors
+*/
+
+.rb-color-white {
+    color: white;
+}
+
+
+
+/*
+* rb.controls.pagination
+*/
+
+.rb-controls-pagination-btn {
+    min-width: 36px ;
+    margin: 0px;
+}
+
+.rb-controls-pagination-btn.rb-controls-border-radius-left {
+    border-radius: 3px 0px 0px 3px;
+}
+
+.rb-controls-pagination-btn.rb-controls-border-radius-right {
+    border-radius: 0px 3px 3px 0px;
+}
+
+.rb-controls-pagination-btn.rb-controls-no-border-radius {
+    border-radius: 0px;
+}
+
+
+/*
+* red button designer styles
+ */
+
+/**
+SNACKS
+ */
+
+[shacks-floating] {
+    cursor: pointer;
+}
+
+[shacks-floating]:hover {
+    cursor: move;
+}
+
+/**
+ARRANGER
+ */
+.rb-grid-arrange-animation {
+    transition-property: left, top, height, width;
+    transition-duration: 0.5s, 0.5s, 0.5s, 0.5s;
+}

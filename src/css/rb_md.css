@@ -1,0 +1,60 @@
+md-option, md-select, .md-text.ng-binding, .md-select-value, .md-select-placeholder   {
+    font-size: 12px;
+}
+
+md-select {
+    margin: 2px;
+}
+
+
+.ng-hide:not(.ng-hide-animate).invisible {
+    visibility: hidden;
+}
+
+
+.md-button.md-fab.md-mini.md-x-mini {
+    margin: 0px;
+    line-height: 28px;
+    width: 28px;
+    height: 28px;
+    min-height: 20px;
+}
+
+/* custom tab transition */
+/*
+[role="tabpanel"] {
+    transition: all cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s;
+    position: absolute;
+}
+[role="tabpanel"].ng-enter, [role="tabpanel"].ng-leave.ng-leave-active  {
+
+}
+*/
+
+/* do not want an tab content transition */
+[role="tabpanel"] {
+    transition: none;
+}
+
+/* Date picker */
+.md-datepicker-button{
+    display: none;
+}
+
+.md-datepicker-input-container{
+    margin-left: 0px;
+    padding-bottom: 2px;
+}
+
+.md-datepicker-input {
+    min-width: 80px;
+    max-width: 90px;
+}
+
+.md-toolbar-tools {
+    font-size: 16px;
+}
+
+md-progress-circular.rb-with-stroke path {
+    stroke: honeydew;
+}

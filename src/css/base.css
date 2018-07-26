@@ -1,0 +1,201 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 25.02.2014, 11:07:31
+    Author     : stokaboka
+*/
+
+
+html,
+body {
+    height: 100%;
+    font-size: 12px;
+
+    font-family: 'Roboto', sans-serif;
+}
+
+#footer {
+    position:relative;
+    bottom: 0px;
+    left:5px;
+    height: 20px;
+}      
+
+.nav, .pagination, .carousel a { 
+    cursor: pointer; 
+}
+
+.ui-show {
+        color: blue;
+        transition: all 0.5s ease;  /* You should probably browser-prefix this */
+}
+.ui-hide {
+        opacity: 0;
+        transition: all 0.5s ease; /* You should probably browser-prefix this*/
+} 
+
+.vertical-text-line {
+    color: darkred;
+    font-weight: bold;
+    margin: 0px 0px 0px 3px;
+}
+
+
+.listvalues {
+    background-color: #FFF;
+    border-color: #CCC;
+    /*width: 100%;
+    */
+    width: auto;
+    max-width: 75%;
+}
+
+.search-help {
+    font-size:10px
+}
+
+.tasks_search{
+    
+}
+
+.table_controls, table {
+    margin-top:3px;
+    margin-bottom:3px;
+}
+
+.table_controls, td {
+    padding:5px;
+}
+
+.form-control, .btn-group, .dropdown-menu, .btn-group, .btn {
+    font-size: 12px;
+}
+
+
+.panel-header {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/*
+    DIALOG STYLES
+*/
+.dialog-title {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+
+/*
+BOOTSTRAP Buttons
+*/
+
+.btn.dropdown-toggle, ul.dropdown-menu  {
+    font-size: 12px;
+}
+
+/*
+Tabs animations
+*/
+.tabsdemoStaticTabs {
+    /*
+   * Animation styles
+   */ }
+.tabsdemoStaticTabs #tab1-content {
+    background-color: #3F51B5;
+}
+.tabsdemoStaticTabs #tab2-content {
+    background-color: #673AB7;
+}
+.tabsdemoStaticTabs #tab3-content {
+    background-color: #00796B;
+}
+.tabsdemoStaticTabs .tabpanel-container {
+    display: block;
+    position: relative;
+    background: white;
+    border: 0px solid black;
+    /*height: 300px;*/
+    /*overflow: hidden; */
+}
+.tabsdemoStaticTabs [role="tabpanel"] {
+    color: white;
+    width: 100%;
+    height: 100%;
+    -webkit-transition: all cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s;
+    transition: all cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s;
+    position: absolute; }
+.tabsdemoStaticTabs [role="tabpanel"].ng-leave.ng-leave-active, .tabsdemoStaticTabs [role="tabpanel"].ng-enter {
+    top: -300px; }
+.tabsdemoStaticTabs [role="tabpanel"].ng-leave, .tabsdemoStaticTabs [role="tabpanel"].ng-enter.ng-enter-active {
+    top: 0; }
+.tabsdemoStaticTabs [role="tabpanel"].ng-leave {
+    z-index: 100; }
+.tabsdemoStaticTabs .tabpanel-container [role="tabpanel"] {
+    padding: 20px; }
+.tabsdemoStaticTabs .after-tabs-area {
+    padding: 25px; }
+.tabsdemoStaticTabs .after-tabs-area > span {
+    margin-top: 25px;
+    padding-right: 15px;
+    vertical-align: middle;
+    line-height: 30px;
+    height: 35px; }
+.tabsdemoStaticTabs .after-tabs-area > md-checkbox {
+    margin-top: 26px;
+    margin-left: 0px; }
+
+
+/*
+* MATERIAL DIALOG STYLES
+*/
+.dialogdemoBasicUsage .full {
+    width: 100%;
+    height: 100%; }
+.dialogdemoBasicUsage .gap {
+    width: 50px; }
+.dialogdemoBasicUsage .md-subheader {
+    background-color: #dcedc8;
+    margin: 0px; }
+.dialogdemoBasicUsage h2.md-subheader {
+    margin: 0px;
+    margin-left: -24px;
+    margin-right: -24px;
+    margin-top: -24px; }
+.dialogdemoBasicUsage h2.md-subheader.md-sticky-clone {
+    margin-right: 0px;
+    margin-top: 0px;
+    box-shadow: 0px 2px 4px 0 rgba(0, 0, 0, 0.16); }
+.dialogdemoBasicUsage h2 .md-subheader-content {
+    padding-left: 10px; }
+
+
+.long > input {
+    width: 264px;
+}
+
+.extra-long > input {
+    width: 528px;
+}
+
+.fill > input {
+    width: 100%;
+}
+
+/*
+*    Angular material custom styles
+*/
+
+/*
+* Meny system
+*/
+
+.menu-bar-button {
+
+}
+.menu-bar-button:hover {
+    color: #1e2022;
+}
