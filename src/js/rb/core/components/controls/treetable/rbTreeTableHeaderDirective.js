@@ -12,7 +12,11 @@ angular.module('rb.controls.treetable')
 function $$$RbTreeTableHeaderDirective(){
 	return {
 		restrict: "E",
-		templateUrl: "tmpl/rb/tree_table_header.html",
+		template: '<div class="rb-tree-table-header">\n' +
+		'    <div class="rb-tree-table-cell" ng-repeat="column in model.columns  | filter: {visible: true}">\n' +
+		'        {{column.title}}\n' +
+		'    </div>\n' +
+		'</div>',
 		replace: true,
 		controller: "rbTreeTableCtrl",
 

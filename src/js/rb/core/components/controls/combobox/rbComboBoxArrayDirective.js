@@ -13,7 +13,6 @@ angular.module('rb.controls.combobox')
 function $$$RbComboBoxArrayDirective() {
 	return {
 		restrict: "E",
-		//templateUrl: "tmpl/controls/arrayComboBox.html",
 		template: '<md-select ng-model="selectedItem" style="margin-top: 3px; margin-bottom: 0px; font-size: 14px;" aria-label="label">\n' +
 		'    <md-option  value="{{item}}" ng-click="onClick(-1)">\n' +
 		'        {{selectedItem.label}}\n' +

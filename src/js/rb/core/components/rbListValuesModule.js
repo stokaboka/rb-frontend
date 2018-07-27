@@ -14,9 +14,8 @@
 	function $$$RblistValuesDirective(rbCore){
 		return {
 			restrict: "EA",
-			//templateUrl: "tmpl/list_values.html",
 			template: '<div aria-label="Список значений"  id="listValuesPanelID" ng-show="model.listvalues.visible" ng-class="model.listvalues.class" ng-style="model.listvalues.style"  ng-cloak style="background-color: #E3EEF7;">' +
-			
+
 			'    <form id="ListValuesSearchForm" name="ListValuesSearchForm" role="form"  ng-submit="" >' +
 
 			'        <md-toolbar style="min-height: 40px;">' +

@@ -12,7 +12,16 @@ angular.module('rb.controls.treetable')
 function $$$RbTreeTableRowDirective($compile) {
 	return {
 		restrict: "E",
-		templateUrl: "tmpl/rb/tree_table_row.html",
+		template: '<div class="rb-tree-table-row" ng-click="onRowClick(row)" ng-dblclick="onRowDoubleClick(row)">\n' +
+		'    <rb-tree-table-cell\n' +
+		'            ng-repeat="column in model.columns  | filter: {visible: true}  track by $index"\n' +
+		'            rb-tree-model="model"\n' +
+		'            rb-tree-row="row"\n' +
+		'            rb-tree-column="column"\n' +
+		'            rb-tree-column-first="$first"\n' +
+		'            ng-class="column.filter.active_class">\n' +
+		'    </rb-tree-table-cell>\n' +
+		'</div>',
 		replace: true,
 		controller: "rbTreeTableCtrl",
 

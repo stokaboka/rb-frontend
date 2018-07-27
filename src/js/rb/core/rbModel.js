@@ -750,6 +750,88 @@ $RbModel.prototype.rollbackTransaction = function () {
 };
 
 
+$RbModel.prototype.row_editor_template = '<md-dialog aria-label="rbModel.transaction.dataSource.editor_title">\n' +
+	'\n' +
+	'        <form method="post" enctype="multipart/form-data" style="display: table;">\n' +
+	'\n' +
+	'            <md-toolbar style="min-height: 40px;">\n' +
+	'                <div class="md-toolbar-tools" style="height: 40px;">\n' +
+	'                    <h4>{{rbModel.transaction.dataSource.editor_title}}</h4>\n' +
+	'                    <span flex></span>\n' +
+	'                    <ng-md-icon icon="close" style="cursor: pointer;" ng-click="cancel()"></ng-md-icon>\n' +
+	'                </div>\n' +
+	'            </md-toolbar>\n' +
+	'\n' +
+	'            <md-dialog-content >\n' +
+	'                <div class="md-dialog-content" style="padding: 6px 24px 0px 24px">\n' +
+	'                        <div ng-repeat="v_column in rbModel.transaction.columns  | filter: {editable: true }" style="margin: 1px; display: table-row;">\n' +
+	'\n' +
+	'                            <div style="display: table-cell; margin-right: 5px;" layout="row" layout-align="start center">\n' +
+	'                                <span>{{v_column.title}}</span>\n' +
+	'                                <p ng-class="v_column.message_class">{{v_column.message}}</p>\n' +
+	'                            </div>\n' +
+	'\n' +
+	'                            <div ng-if="v_column.listvalues == null && v_column.combobox == null  && v_column.sequence == null" style="display: table-cell;">\n' +
+	'                                <div ng-if="v_column.editable">\n' +
+	'                                    <div ng-switch on="v_column.db_type">\n' +
+	'\n' +
+	'                                        <div ng-switch-when="NUMBER" >\n' +
+	'                                            <input type="number"  ng-focus="hide_listvalues()" ng-model="rbModel.transaction.data[v_column.db_name]" class="long" style="width: 100%;">\n' +
+	'                                        </div>\n' +
+	'\n' +
+	'                                        <div ng-switch-when="FILE" >\n' +
+	'                                            <input type="file" id="input_document_file_id" target_field="{{v_column.db_name}}" name="document_file" file-selector-on-change="fileToUploadChanged">\n' +
+	'                                        </div>\n' +
+	'\n' +
+	'                                        <div ng-switch-when="TEXT" >\n' +
+	'                                            <textarea rows="4" cols="50" ng-focus="hide_listvalues()" placeholder="{{v_column.title}}" style="width: 100%;" ng-model="rbModel.transaction.data[v_column.db_name]" ng-required="false" class="form-control"></textarea>\n' +
+	'                                        </div>\n' +
+	'\n' +
+	'                                        <div ng-switch-when="DATE" >\n' +
+	'                                            <md-datepicker ng-model="rbModel.transaction.data[v_column.db_name]" ng-focus="hide_listvalues()"></md-datepicker>\n' +
+	'                                        </div>\n' +
+	'\n' +
+	'                                        <div ng-switch-default >\n' +
+	'                                            <input type="text"  ng-focus="hide_listvalues()" ng-model="rbModel.transaction.data[v_column.db_name]" class="long" style="width: 100%;">\n' +
+	'                                        </div>\n' +
+	'\n' +
+	'                                    </div>\n' +
+	'                                </div>\n' +
+	'\n' +
+	'                                <div ng-if="!v_column.editable">\n' +
+	'                                    <input type="text" ng-model="rbModel.transaction.data[v_column.db_name]" disabled>\n' +
+	'                                </div>\n' +
+	'\n' +
+	'                            </div>\n' +
+	'\n' +
+	'                            <div ng-if="v_column.listvalues != null">\n' +
+	'                                <input type="text"  ng-model="rbModel.transaction.data[v_column.db_name]">\n' +
+	'                                <ng-md-icon icon="list" listvalues-button-column="{{v_column}}"><md-tooltip md-direction="right">Список значений</md-tooltip></ng-md-icon>\n' +
+	'                            </div>\n' +
+	'\n' +
+	'                            <div ng-if="v_column.sequence != null">\n' +
+	'                                <input type="text" ng-model="rbModel.transaction.data[v_column.db_name]">\n' +
+	'                                <ng-md-icon icon="plus_one" sequencer-button-column="{{v_column}}"><md-tooltip md-direction="right">Получить следующий номер</md-tooltip></ng-md-icon>\n' +
+	'                            </div>\n' +
+	'\n' +
+	'                            <div ng-if="v_column.combobox != null" style="padding-top: 3px; padding-bottom: 3px;">\n' +
+	'                                <rb-data-combobox combobox-column="{{v_column}}" label="v_column.title" placeholder="{{v_column.title}}"><md-tooltip md-direction="right">Список возможных значений для {{v_column.title}}</md-tooltip></rb-data-combobox>\n' +
+	'                            </div>\n' +
+	'\n' +
+	'                        </div>\n' +
+	'                </div>\n' +
+	'            </md-dialog-content>\n' +
+	'\n' +
+	'            <md-dialog-actions layout="row">\n' +
+	'                <span flex></span>\n' +
+	'                <md-button class="md-raised md-primary" ng-click="ok()" ng-show="$root.user.logged" aria-label="ОК">OK</md-button>\n' +
+	'                <md-button class="md-raised" ng-click="cancel()" aria-label="Cancel">Cancel</md-button>\n' +
+	'            </md-dialog-actions>\n' +
+	'\n' +
+	'        </form>\n' +
+	'\n' +
+	'</md-dialog>\n';
+
 /**
  * create new record in DataSource
  * @param __dataSource
@@ -774,7 +856,8 @@ $RbModel.prototype.create = function(__dataSource, __event){
 
     self.$mdDialog.show({
         controller: "RbEditorModalCtrl",
-        templateUrl: 'tmpl/row_editor.html',
+//        templateUrl: 'tmpl/row_editor.html',
+	    template: $RbModel.prototype.row_editor_template,
         parent: angular.element(document.body),
         targetEvent: __event
     })
@@ -848,7 +931,8 @@ $RbModel.prototype.edit = function(__dataSource, __row_index, __event) {
 
 		    self.$mdDialog.show({
 			    controller: "RbEditorModalCtrl",
-			    templateUrl: 'tmpl/row_editor.html',
+			    // templateUrl: 'tmpl/row_editor.html',
+			    template: $RbModel.prototype.row_editor_template,
 			    parent: angular.element( document.body ),
 			    targetEvent: __event
 		    }).then(function(answer) {

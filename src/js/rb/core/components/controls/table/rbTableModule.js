@@ -73,7 +73,6 @@ function $$$RbTableController($rootScope, $scope, $attrs, $parse, $mdDialog, rbC
 	$scope.__do_Show_History_Dialog = function(__event, __data_source) {
 		$mdDialog.show({
 			controller: "RbDialogHistoryController",
-			//templateUrl: 'tmpl/common/history.html',
 			template: '<md-dialog aria-label="История изменения" class="dialogdemoBasicUsage">' +
 			'    <md-content>' +
 			'        <md-subheader class="md-sticky-no-effect dialog-title">История изменений</md-subheader>' +

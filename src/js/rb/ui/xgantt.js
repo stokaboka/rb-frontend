@@ -811,7 +811,110 @@ agat_gantt_module.directive('hiGantt', ['$window', '$mdDialog', 'rbCore', 'agat_
     return {
         //require: 'ngModel',
         restrict: "E",
-        templateUrl: "tmpl/higantt/gantt_tmpl.html",
+	    template: '<div>\n' +
+	    '    <div layout="row" layout-align="start center" >\n' +
+	    '\n' +
+	    '        <hi-gantt-timescales hi-change-handler="onTimeScaleChanged" hi-title="Цена деления шкалы времени" style="margin-left: 5px;"></hi-gantt-timescales>\n' +
+	    '\n' +
+	    '        <hi-gantt-zoom-column hi-change-handler="onZoomColumnChanged" hi-data-model="column_width_percent" hi-title="Масштаб" style="height: 32px; width: 200px; margin-left: 5px;"></hi-gantt-zoom-column>\n' +
+	    '        <!--<hi-gantt-zoom-percent-column hi-change-handler="onZoomPercentColumnChanged"  hi-data-model="column_width_percent" hi-title="Масштаб" style="height: 32px; width: 100px;"></hi-gantt-zoom-percent-column>\n' +
+	    '        -->\n' +
+	    '        <label>с</label>\n' +
+	    '        <input type="date"  ng-model="search_date_start" ng-required="false">\n' +
+	    '\n' +
+	    '        <label>по</label>\n' +
+	    '        <input type="date"  ng-model="search_date_end" ng-required="false">\n' +
+	    '\n' +
+	    '        <ng-transclude style="margin-left: 5px;"></ng-transclude>\n' +
+	    '        <div flex></div>\n' +
+	    '        <md-button class="md-raised md-primary" ng-click="onClickReload()">Обновить</md-button>\n' +
+	    '    </div>\n' +
+	    '\n' +
+	    '    <div id="x_gantt" class="x-gantt no-selection" ng-style="x_gantt_area_style">\n' +
+	    '\n' +
+	    '        <div id="x_gantt_table_column_header_id" ng-style="table_columns_header_style" class="x-gantt-columns-header no-selection">\n' +
+	    '            <div\n' +
+	    '                    ng-repeat="tbl_column_header in table_columns_headers track by $index"\n' +
+	    '                    ng-style="tbl_column_header.style"\n' +
+	    '                    class="x-gantt-cell x-gantt-header-column  no-selection">\n' +
+	    '                {{tbl_column_header.text}}\n' +
+	    '            </div>\n' +
+	    '        </div>\n' +
+	    '\n' +
+	    '        <div id="x_gantt_column_header_id" ng-style="column_header_style" class="x-gantt-columns-header no-selection">\n' +
+	    '\n' +
+	    '            <div\n' +
+	    '                    ng-repeat="month_header in months_header track by $index"\n' +
+	    '                    ng-style="month_header.style"\n' +
+	    '                    class="x-gantt-cell x-gantt-header-column  no-selection">\n' +
+	    '                {{month_header.text}}\n' +
+	    '            </div>\n' +
+	    '\n' +
+	    '            <div\n' +
+	    '                    ng-repeat="column_header in columns_header track by $index"\n' +
+	    '                    ng-style="column_header.style"\n' +
+	    '                    class="x-gantt-cell x-gantt-header-column  no-selection">\n' +
+	    '                {{column_header.text}}\n' +
+	    '            </div>\n' +
+	    '\n' +
+	    '        </div>\n' +
+	    '\n' +
+	    '        <scroll-area id="x_gantt_grid_id" hi-scroll-handler="onScrollGridArea" class="x-gantt-grid  no-selection" ng-style="grid_position">\n' +
+	    '\n' +
+	    '            <div class=" no-selection">\n' +
+	    '\n' +
+	    '                <div\n' +
+	    '                        ng-repeat="gantt_column in columns track by $index"\n' +
+	    '                        ng-style="gantt_column.style"\n' +
+	    '                        class="x-gantt-cell x-gantt-column  no-selection">\n' +
+	    '                </div>\n' +
+	    '\n' +
+	    '                <div\n' +
+	    '                        ng-repeat="gantt_row in gantt_items track by $index"\n' +
+	    '                        ng-style="gantt_row.styles.row"\n' +
+	    '                        class="x-gantt-cell x-gantt-row  no-selection">\n' +
+	    '                </div>\n' +
+	    '\n' +
+	    '                <div\n' +
+	    '                        ng-repeat="gantt_item in gantt_items track by $index"\n' +
+	    '                        ng-style="gantt_item.styles.item"\n' +
+	    '                        class="x-gantt-cell x-gantt-box x-gantt-item  no-selection"\n' +
+	    '                        ng-click="showGanttItemDialog(event, $index, gantt_item)">\n' +
+	    '                    {{gantt_item.text}}\n' +
+	    '                </div>\n' +
+	    '\n' +
+	    '            </div>\n' +
+	    '\n' +
+	    '        </scroll-area>\n' +
+	    '\n' +
+	    '        <scroll-area id="x_gantt_rows_header_id" hi-scroll-handler="onScrollRowsArea" class="x-gantt-grid no-selection" ng-style="row_header_style">\n' +
+	    '            <div\n' +
+	    '                    ng-repeat="table_row in gantt_items track by $index"\n' +
+	    '                    ng-style="table_row.styles.row_header"\n' +
+	    '                    class="x-gantt-cell x-gantt-table-row  no-selection"\n' +
+	    '                    ng-click="showGanttItemDialog(event, $index, table_row)">\n' +
+	    '                <hi-gantt-table-cell\n' +
+	    '                    ng-repeat="table_column_row in table_row.styles.table_row track by $index"\n' +
+	    '                    ng-style="table_column_row.position"\n' +
+	    '                    class="x-gantt-cell x-gantt-table-row-item"\n' +
+	    '                    ng-model="table_row[table_column_row.id]"\n' +
+	    '                    >\n' +
+	    '\n' +
+	    '                </hi-gantt-table-cell>\n' +
+	    '                <!--<div-->\n' +
+	    '                        <!--ng-repeat="table_column_row in table_row.styles.table_row track by $index"-->\n' +
+	    '                        <!--ng-style="table_column_row.position"-->\n' +
+	    '                        <!--class="x-gantt-cell x-gantt-table-row-item">-->\n' +
+	    '                    <!--{{table_row[table_column_row.id]}}-->\n' +
+	    '                <!--</div>-->\n' +
+	    '\n' +
+	    '            </div>\n' +
+	    '        </scroll-area>\n' +
+	    '\n' +
+	    '        <vertical-divider id="x_gantt_vertical_delimiter" ng-style="vertical_delimiter_style" class="no-selection" hi-vertical-divider-handler="onVerticalDividerChanged"></vertical-divider>\n' +
+	    '\n' +
+	    '    </div>\n' +
+	    '</div>',
         controller: "hiGanttController",
         transclude: true,
         replace: false,

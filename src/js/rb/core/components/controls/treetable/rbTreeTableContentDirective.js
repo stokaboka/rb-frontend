@@ -12,7 +12,11 @@ angular.module('rb.controls.treetable')
 function $$$RbTreeTableContentDirective() {
 	return {
 		restrict: "E",
-		templateUrl: "tmpl/rb/tree_table_content.html",
+		template: '<div>\n' +
+		'    <rb-tree-table-header rb-tree-model="model" ></rb-tree-table-header>\n' +
+		'    <rb-table-filter rb-data-source="service" rb-reload-button="false"></rb-table-filter>\n' +
+		'    <rb-tree-table-row ng-repeat="row in root.items track by $index" rb-tree-model="model" rb-tree-row="row" rb-tree-test="$index"></rb-tree-table-row>\n' +
+		'</div>',
 		replace: true,
 		controller: "rbTreeTableCtrl",
 		multiElement: true,

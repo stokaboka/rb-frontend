@@ -12,7 +12,19 @@ angular.module('rb.controls.treetable')
 function $$$RbTreeTableDirective(rbCore) {
 	return {
 		restrict: "E",
-		templateUrl: "tmpl/rb/tree_table_tmpl.html",
+		template: '<div flex layout="column">\n' +
+		'    <div flex layout="row">\n' +
+		'        <panel-header rb-data-source="service" panel-header-label="{{service.title}}">\n' +
+		'            <md-button class="md-icon-button md-primary rb-no-margin" ng-click="__do_Search()" aria-label="Найти">\n' +
+		'                <ng-md-icon icon="search"><md-tooltip>Обновить таблицу</md-tooltip></ng-md-icon>\n' +
+		'            </md-button>\n' +
+		'        </panel-header>\n' +
+		'    </div>\n' +
+		'\n' +
+		'    <div class="rb-tree-table">\n' +
+		'        <rb-tree-table-content rb-tree-model="model"  rb-data-source="service" class="rb-tree-table-row-group"></rb-tree-table-content>\n' +
+		'    </div>\n' +
+		'</div>',
 		replace: true,
 		controller: "rbTreeTableCtrl",
 
