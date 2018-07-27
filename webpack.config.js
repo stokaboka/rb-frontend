@@ -10,8 +10,8 @@ let webpack = require('webpack');
 //var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 //var debug = process.env.NODE_ENV !== "production";
-// var debug = true;
-let debug = false;
+// let debug = true;
+ let debug = false;
 if(debug){
 	process.env.NODE_ENV = 'development';
 	//process.env.NODE_ENV = 'testing'

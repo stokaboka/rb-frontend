@@ -72,16 +72,16 @@ let $$$SiteMapConstant =
 	};
 
 let $$$SiteProvider = function () {
-	var __site_map = null;
-	var __site_map_object = null;
-	var __home_page = null;
+	let __site_map = null;
+	let __site_map_object = null;
+	let __home_page = null;
 
 	this.setSiteMap = function ( __options ) {
 		__site_map_object = __options;
 
 		__site_map = new $RbSiteMap( __site_map_object );
 
-		var __home_page = _.chain( __site_map.sections )
+		let __home_page = _.chain( __site_map.sections )
 			.pluck( 'pages' )
 			.flatten()
 			.findWhere( { id: __site_map.home.page } )
@@ -100,9 +100,18 @@ let $$$SiteProvider = function () {
 function $$$UsersService( $http, $q, $cookieStore )
 {
 
-	var __url = 'api';
+	let __url = 'api';
 
-	var __auth_http = function(__method, __remote_handler, __data, __headers){
+	let resetStatus = function( __msg, __ok, __err ){
+		service.status.success = __ok;
+		service.status.error = __err;
+		if(__msg)
+			service.status.message = __msg;
+		else
+			service.status.message = "Обработка данных...";
+	};
+
+	let __auth_http = function(__method, __remote_handler, __data, __headers){
 		let deffered = $q.defer();
 		if(angular.isUndefined(__data))__data = null;
 		if(angular.isUndefined(__headers))__headers = null;
@@ -113,29 +122,15 @@ function $$$UsersService( $http, $q, $cookieStore )
 			headers: __headers
 			//transformRequest: function(data) { return data; }
 		}).then(function(data, status, headers, config) {
-			service.status.success = true;
-			service.status.error = false;
-			service.status.message = "Выполнено";
 			deffered.resolve(data, status, headers, config);
 		}).catch(function(data, status, headers, config) {
-			service.status.error = true;
-			service.status.success = false;
-			service.status.message = "Ошибка сети... " + data;
 			deffered.reject(data, status, headers, config);
 		});
 		return deffered.promise;
 	};
 
-	var resetStatus = function( __msg, __ok, __err ){
-		service.status.success = __ok;
-		service.status.error = __err;
-		if(__msg)
-			service.status.message = __msg;
-		else
-			service.status.message = "Обработка данных...";
-	};
-
-	var setSession = function( __data, __logged, __anonymous ){
+	let setSession = function( __data, __logged, __anonymous ){
+		service.password = '';
 		service.anonymous = __anonymous;
 		service.logged = __logged;
 		service.changed++;
@@ -159,8 +154,7 @@ function $$$UsersService( $http, $q, $cookieStore )
 			service.displayLogin = service.login;
 		}else {
 			service.buttonPrompt = 'Login';
-			service.password = '';
-			service.displayLogin = 'Гость';
+			service.displayLogin = 'Guest';
 		}
 
 		switch(service.group){
@@ -175,25 +169,25 @@ function $$$UsersService( $http, $q, $cookieStore )
 		}
 	};
 
-	var service = {
+	let service = {
 
 		status:{
 			success: false,
 			error: false,
-			message: ""
+			message: ''
 		},
 
-		login: "",
-		nick: "",
-		password: "",
-		f: "",
-		i: "",
-		o: "",
-		sq: "",
-		sa: "",
-		roles: "",
+		login: '',
+		password: '',
+		nick: '',
+		f: '',
+		i: '',
+		o: '',
+		sq: '',
+		sa: '',
+		roles: '',
 
-		displayLogin: 'Гость',
+		displayLogin: 'Guest',
 
 		logged: false,
 		anonymous: false,
@@ -211,63 +205,65 @@ function $$$UsersService( $http, $q, $cookieStore )
 
 		doLogin: function(){
 
-			if(!service.login)
-				service.login = $("#Login").val();
+			// service.login = $('#Login').val();
 
-			if(!service.password)
-				service.password = $("#Password").val();
+			// let password = $("#Password").val();
+			// $('#Password').val('');
 
 			let __data = $.param({Login: service.login, Password: service.password});
 			let __headers = {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'};
+			service.password = '';
 
-			let __anonymous_session = __auth_http('POST', "/auth/signIn.json", __data, __headers);
-			__anonymous_session.then(
+			let __login = __auth_http('POST', '/auth/signIn.json', __data, __headers);
+
+			__login.then(
 				function(__data, __status){
-					if(__data.data["Result"] === 'OK') {
+					if(__data.data['Result'] === 'OK') {
 						setSession(__data, true, false);
-						resetStatus('Выполнен вход', true, false);
+						resetStatus('Login', true, false);
 					}else{
 						setSession(__data, false, false);
-						resetStatus('Вход отклонен - неправильное имя пользователя или пароль', false, false);
+						resetStatus('Access denied', false, false);
 						service.doAnonymousSession();
 					}
 				},
 				function(__data, __status){
 					setSession(__data, false, false);
-					resetStatus('Вход отклонен - ошибка сети', false, false);
+					resetStatus('Network error...', false, false);
 				}
 			);
 		},
 
 		doLogout: function(){
 
-			let __data = $.param({Login: service.login, Password: service.password});
+			let __data = $.param({Login: service.login, Password: ''});
 			let __headers = {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'};
 
-			let __anonymous_session = __auth_http('POST', "/auth/signOut.json", __data, __headers);
-			__anonymous_session.then(
+			let __logout = __auth_http('POST', "/auth/signOut.json", __data, __headers);
+
+			__logout.then(
 				function( __data, __status ){
 					setSession( __data, false, false );
-					resetStatus( 'Выполнен выход', true, false );
+					resetStatus( 'Logout', true, false );
 					service.doAnonymousSession();
 				},
 				function( __data, __status ){
 					setSession(__data, false, false);
-					resetStatus( 'выход отклонен - ошибка сети', false, false );
+					resetStatus( 'Network error...', false, false );
 				}
 			);
 		},
 
 		doAnonymousSession: function(){
-			let __anonymous_session = __auth_http('GET', "/auth/anonymousSession.json");
-			__anonymous_session.then(
+			let __anonymous = __auth_http('GET', "/auth/anonymousSession.json");
+			__anonymous.then(
 				function( __data, __status ){
 					setSession( __data, false, true );
-					resetStatus( 'Выполнен анонимный вход', true, false );
+					resetStatus( 'Anonymous login', true, false );
 				},
 				function(__data, __status){
 					setSession(__data, false, false);
-					resetStatus( 'Анонимный вход отклонен - ошибка сети', false, false );
+					resetStatus( 'Network error...', false, false );
 				}
 			);
 		}

@@ -9,6 +9,9 @@
 
 import $RbCore from '../rbCore';
 
+angular.module('rbAppControllers', [])
+	.controller('ApplicationCtrl', $$$ApplicationCtrl);
+
 angular.module('rb.core')
 	.config($$$RbCoreConfig)
 	.run($$$RbCoreRun)
@@ -236,3 +239,97 @@ function $$$RbTopMenuNavBarDirective( $rootScope, utils, rbCore )
 	};
 }
 $$$RbTopMenuNavBarDirective.$inject = [ '$rootScope', 'utils', 'rbCore' ];
+
+
+function $$$ApplicationCtrl($rootScope, $scope, $route, $routeParams, $location, $mdDialog, SITE_MAP){
+	$scope.user.doAnonymousSession();
+
+	$scope.doLoginLogout = function(ev){
+		if($scope.user.logged){
+			$scope.user.doLogout();
+		}else{
+			$scope.loginDialog(ev);
+		}
+	};
+
+	$scope.loginDialog = function(ev){
+		$mdDialog.show({
+			controller: "DialogController",
+			// templateUrl: 'tmpl/common/login.html',
+			template: '<md-dialog aria-label="Login" class="dialogdemoBasicUsage" ng-cloak>\n' +
+			'\n' +
+			'    <form id="user_login_form" name="user_login_form" role="form">\n' +
+			'\n' +
+			'        <md-toolbar>\n' +
+			'            <div class="md-toolbar-tools">\n' +
+			'                <h2>Login</h2>\n' +
+			'                <span flex></span>\n' +
+			'                <ng-md-icon icon="close" style="cursor: pointer;" ng-click="cancel()"></ng-md-icon>\n' +
+			'            </div>\n' +
+			'        </md-toolbar>\n' +
+			'\n' +
+			'        <md-dialog-content>\n' +
+			'            <div class="md-dialog-content">\n' +
+			'\n' +
+			'                <md-input-container class="md-block">\n' +
+			'                    <label>login</label>\n' +
+			'                    <input id="Login" name="Login"  ng-model="user.login" required ng-minlength="1" ng-maxlength="30">\n' +
+			'\n' +
+			'                    <div ng-messages="user_login_form.Login.$error" role="alert" multiple>\n' +
+			'                        <div ng-message="required" class="my-message">You must specify a username/login</div>\n' +
+			'                        <div ng-message="maxlength" class="my-message">Too short username/login</div>\n' +
+			'                        <div ng-message="minlength" class="my-message">Username/login is too long</div>\n' +
+			'                    </div>\n' +
+			'                </md-input-container>\n' +
+			'\n' +
+			'                <md-input-container class="md-block">\n' +
+			'                    <label>password</label>\n' +
+			'                    <input id="Password" name="Password" ng-model="user.password" type="password" required ng-minlength="1" ng-maxlength="30">\n' +
+			'\n' +
+			'                    <div ng-messages="user_login_form.Login.$error" role="alert" multiple>\n' +
+			'                        <div ng-message="required" class="my-message">You must specify a user password</div>\n' +
+			'                        <div ng-message="minlength" class="my-message">Too short password</div>\n' +
+			'                        <div ng-message="maxlength" class="my-message">Password is too long</div>\n' +
+			'                    </div>\n' +
+			'                </md-input-container>\n' +
+			'\n' +
+			'            </div>\n' +
+			'        </md-dialog-content>\n' +
+			'\n' +
+			'        <md-dialog-actions layout="row">\n' +
+			'            <span flex></span>\n' +
+			'            <md-button class="md-raised md-primary" aria-label="OK" type="submit" ng-click="hide()">{{user.buttonPrompt}}</md-button>\n' +
+			'            <md-button class="md-raised" aria-label="Cancel" ng-click="cancel()" >Cancel</md-button>\n' +
+			'        </md-dialog-actions>\n' +
+			'\n' +
+			'    </form>\n' +
+			'\n' +
+			'</md-dialog>\n',
+			parent: angular.element(document.body),
+			targetEvent: ev
+		})
+			.then(function(answer) {
+				$scope.user.doLogin();
+			}, function() {
+
+			});
+	};
+
+	$rootScope.$on("$routeChangeSuccess", function(event, current , previous ) {
+
+		let __map_page = _.chain(SITE_MAP.sections)
+			.pluck('pages')
+			.flatten()
+			.findWhere({route: $location.$$path})
+			.value();
+
+		if($scope.rbModel) {
+			if (typeof __map_page !== 'undefined') {
+				$scope.rbModel.topmost_page_name = __map_page.title;
+			} else {
+				$scope.rbModel.topmost_page_name = "#";
+			}
+		}
+	});
+}
+$$$ApplicationCtrl.$inject = ['$rootScope', '$scope', '$route', '$routeParams', '$location', '$mdDialog', 'SITE_MAP'];
