@@ -27,12 +27,12 @@ angular.module('rb.core')
 ;
 
 function $$$RbCoreConfig() {
-	console.log("$$$RbCoreConfig");
+	console.log("Rb configured.");
 }
 $$$RbCoreConfig.$inject = [];
 
 function $$$RbCoreRun() {
-	console.log("$$$RbCoreRun");
+	console.log("Rb run.");
 }
 $$$RbCoreRun.$inject = [];
 

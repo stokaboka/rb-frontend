@@ -127,7 +127,7 @@
 	$$$rbAppConfig.$inject = [ '$logProvider', '$routeProvider', '$locationProvider', '$mdThemingProvider', '$mdDateLocaleProvider', '$localStorageProvider', 'SITE_MAP', 'siteProvider'];
 
 	function $$$rbAppRun($rootScope, $localStorage, $log, $mdDialog,  SITE_MAP, user, rbCore, site, $route, $location) {
-		console.log("*** app.run");
+		console.log("Run the application");
 
 		window.moment = moment;
 
@@ -164,52 +164,6 @@
 			}
 		});
 
+		console.log("The application started");
 	};
 	$$$rbAppRun.$inject = ['$rootScope', '$localStorage', '$log', '$mdDialog', 'SITE_MAP', 'user',  'rbCore', 'site', '$route', '$location'];
-
-	// function $$$ApplicationCtrl($rootScope, $scope, $route, $routeParams, $location, $mdDialog, SITE_MAP){
-	// 	$scope.user.doAnonymousSession();
-	//
-	// 	$scope.doLoginLogout = function(ev){
-	// 		if($scope.user.logged){
-	// 			$scope.user.doLogout();
-	// 		}else{
-	// 			$scope.loginDialog(ev);
-	// 		}
-	// 	};
-	//
-	// 	$scope.loginDialog = function(ev){
-	// 		$mdDialog.show({
-	// 			controller: "DialogController",
-	// 			templateUrl: 'tmpl/common/login.html',
-	// 			parent: angular.element(document.body),
-	// 			targetEvent: ev
-	// 		})
-	// 			.then(function(answer) {
-	// 				$scope.user.doLogin();
-	// 			}, function() {
-	//
-	// 			});
-	// 	};
-	//
-	// 	$rootScope.$on("$routeChangeSuccess", function(event, current , previous ) {
-	//
-	// 		let __map_page = _.chain(SITE_MAP.sections)
-	// 			.pluck('pages')
-	// 			.flatten()
-	// 			.findWhere({route: $location.$$path})
-	// 			.value();
-	//
-	// 		if($scope.rbModel) {
-	// 			if (typeof __map_page !== 'undefined') {
-	// 				$scope.rbModel.topmost_page_name = __map_page.title;
-	// 			} else {
-	// 				$scope.rbModel.topmost_page_name = "#";
-	// 			}
-	// 		}
-	// 	});
-	// }
-	// $$$ApplicationCtrl.$inject = ['$rootScope', '$scope', '$route', '$routeParams', '$location', '$mdDialog', 'SITE_MAP'];
-
-// angular.module('rbAppControllers', [])
-// 	.controller('ApplicationCtrl', $$$ApplicationCtrl);
