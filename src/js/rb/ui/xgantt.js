@@ -1251,7 +1251,7 @@ agat_gantt_module.directive('hiGanttTableCell', ['agat_gantt_service', function(
     };
 }]);
 
-agat_gantt_module.directive("scrollArea", function($window){
+agat_gantt_module.directive("scrollArea", ['$window', function($window){
     return {
         restrict: "E",
         template: '<div style="display: block; position: absolute; overflow:auto;"><ng-transclude></ng-transclude></div>',
@@ -1275,9 +1275,9 @@ agat_gantt_module.directive("scrollArea", function($window){
 
         }
     };
-});
+}]);
 
-agat_gantt_module.directive("verticalDivider", function($window){
+agat_gantt_module.directive("verticalDivider", ['$window', function($window){
     return {
         restrict: "E",
         template: '<div ng-mousedown="onDelimiterMouseDown(event)" ng-mouseup="onDelimiterMouseUp(event)" ng-mousemove="onDelimiterMouseMove(event)" class="x-vertical-delimiter"></div>',
@@ -1337,7 +1337,7 @@ agat_gantt_module.directive("verticalDivider", function($window){
 
         }
     };
-});
+}]);
 
 agat_gantt_module.controller('DialogGanttItemController', function ($scope, $mdDialog, index, item) {
 
